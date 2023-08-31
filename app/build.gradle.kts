@@ -1,19 +1,28 @@
 plugins {
 	id("com.android.application")
-	id("org.jetbrains.kotlin.android")
+	kotlin("android")
+	kotlin("plugin.serialization")
+	id("com.google.dagger.hilt.android")
+	id("kotlin-kapt")
+}
+
+kapt {
+	correctErrorTypes = true
 }
 
 android {
-	namespace = "ru.nb.domofon"
-	compileSdk = 34
+	namespace = ProjectConfig.appId
+	compileSdk = ProjectConfig.compileSdk
 
 	defaultConfig {
-		applicationId = "ru.nb.domofon"
-		minSdk = 24
-		versionCode = 1
-		versionName = "1.0"
+		applicationId = ProjectConfig.appId
+		minSdk = ProjectConfig.minSdk
+		targetSdk = ProjectConfig.targetSdk
+		versionCode = ProjectConfig.versionCode
+		versionName = ProjectConfig.versionName
 
-		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		testInstrumentationRunner = "ru.nb.starwars.HiltTestRunner"
 		vectorDrawables {
 			useSupportLibrary = true
 		}
@@ -26,17 +35,22 @@ android {
 		}
 	}
 	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_1_8
-		targetCompatibility = JavaVersion.VERSION_1_8
+//		sourceCompatibility = JavaVersion.VERSION_1_8
+//		targetCompatibility = JavaVersion.VERSION_1_8
+
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
 	}
 	kotlinOptions {
-		jvmTarget = "1.8"
+//		jvmTarget = "1.8"
+		jvmTarget = "17"
 	}
+
 	buildFeatures {
 		compose = true
 	}
 	composeOptions {
-		kotlinCompilerExtensionVersion = "1.4.3"
+		kotlinCompilerExtensionVersion = Compose.composeCompilerVersion
 	}
 	packaging {
 		resources {
@@ -45,25 +59,62 @@ android {
 	}
 }
 
+//tasks.withType<org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs> {
+//	kotlinOptions {
+//		jvmTarget = "1.8"
+//	}
+//}
+
 dependencies {
+	implementation(project(Modules.cameraData))
+	implementation(project(Modules.cameraDomain))
+	implementation(project(Modules.cameraPresenter))
 
-	implementation("androidx.core:core-ktx:1.10.1")
-	implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-	implementation("androidx.activity:activity-compose:1.7.2")
-	implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-	implementation("androidx.compose.ui:ui")
-	implementation("androidx.compose.ui:ui-graphics")
-	implementation("androidx.compose.ui:ui-tooling-preview")
-	implementation("androidx.compose.material3:material3")
-	implementation("androidx.compose.material:material")
-	implementation("androidx.compose.material:material-icons-extended")
-	implementation("me.saket.swipe:swipe:1.2.0")
+	implementation(project(Modules.doorData))
+	implementation(project(Modules.doorDomain))
+	implementation(project(Modules.doorPresenter))
 
-	testImplementation("junit:junit:4.13.2")
-	androidTestImplementation("androidx.test.ext:junit:1.1.5")
-	androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-	androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-	androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-	debugImplementation("androidx.compose.ui:ui-tooling")
-	debugImplementation("androidx.compose.ui:ui-test-manifest")
+	implementation(DaggerHilt.hiltAndroid)
+	kapt(DaggerHilt.hiltCompiler)
+
+	implementation(AndroidX.coreKtx)
+	implementation(Compose.activityCompose)
+
+	implementation(platform(Compose.bom))
+	implementation(Compose.ui)
+	implementation(Compose.uiGraphics)
+	implementation(Compose.uiToolingPreview)
+	implementation(Compose.material)
+	implementation(Compose.material3)
+	implementation(Compose.materialIcon)
+	implementation(Compose.viewModelCompose)
+	implementation(Compose.navigation)
+	implementation(Compose.hiltNavigationCompose)
+	implementation(Compose.coilCompose)
+
+	implementation(Kotlin.serialization)
+	implementation(KTor.core)
+	implementation(KTor.android)
+	implementation(KTor.negotiation)
+	implementation(KTor.json)
+	implementation(KTor.kotlinJson)
+	implementation(KTor.logging)
+
+	kapt(Room.roomCompiler)
+	implementation(Room.roomKtx)
+	implementation(Room.roomRuntime)
+
+	testImplementation(Testing.junit4)
+	androidTestImplementation(Testing.junitAndroidExt)
+	androidTestImplementation(Testing.espresso)
+
+	androidTestImplementation(platform(Compose.bom))
+	androidTestImplementation(Testing.composeUiTest)
+	androidTestImplementation(Testing.coroutines)
+	androidTestImplementation(Testing.turbine)
+	debugImplementation(Testing.uiTooling)
+	debugImplementation(Testing.manifest)
+
+	androidTestImplementation(Testing.hiltTesting)
+	kaptAndroidTest(DaggerHilt.hiltCompiler)
 }

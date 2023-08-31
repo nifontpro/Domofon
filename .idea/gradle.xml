@@ -12,6 +12,15 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/camera" />
+            <option value="$PROJECT_DIR$/camera/camera_data" />
+            <option value="$PROJECT_DIR$/camera/camera_domain" />
+            <option value="$PROJECT_DIR$/camera/camera_presenter" />
+            <option value="$PROJECT_DIR$/door" />
+            <option value="$PROJECT_DIR$/door/door_data" />
+            <option value="$PROJECT_DIR$/door/door_domain" />
+            <option value="$PROJECT_DIR$/door/door_presenter" />
           </set>
         </option>
       </GradleProjectSettings>

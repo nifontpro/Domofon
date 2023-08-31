@@ -61,7 +61,6 @@ class MainActivity : ComponentActivity() {
 						screen = { TabScreen(title = "Contacts") }
 					)
 				)
-
 				Column(modifier = Modifier.fillMaxSize()) {
 					Text(
 						"Мой дом", modifier = Modifier.fillMaxWidth(),

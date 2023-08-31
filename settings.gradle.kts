@@ -1,5 +1,6 @@
+@file:Suppress("UnstableApiUsage")
 pluginManagement {
-	repositories {
+		repositories {
 		google()
 		mavenCentral()
 		gradlePluginPortal()
@@ -14,5 +15,16 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Domofon"
+
 include(":app")
+
+include(":camera")
+include(":camera:camera_data")
+include(":camera:camera_domain")
+include(":camera:camera_presenter")
+
+include(":door")
+include(":door:door_data")
+include(":door:door_domain")
+include(":door:door_presenter")
  
