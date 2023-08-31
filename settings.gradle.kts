@@ -18,6 +18,10 @@ rootProject.name = "Domofon"
 
 include(":app")
 
+include(":base")
+include(":base:base_data")
+include(":base:base_domain")
+
 include(":camera")
 include(":camera:camera_data")
 include(":camera:camera_domain")

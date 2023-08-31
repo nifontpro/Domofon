@@ -68,6 +68,7 @@ dependencies {
     implementation Compose.uiToolingPreview
     implementation Compose.navigation
     implementation Compose.hiltNavigationCompose
+    implementation Compose.material
     implementation Compose.material3
     implementation Compose.materialIcon
     implementation Compose.runtime

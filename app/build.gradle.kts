@@ -84,7 +84,6 @@ dependencies {
 	implementation(Compose.ui)
 	implementation(Compose.uiGraphics)
 	implementation(Compose.uiToolingPreview)
-	implementation(Compose.material)
 	implementation(Compose.material3)
 	implementation(Compose.materialIcon)
 	implementation(Compose.viewModelCompose)
