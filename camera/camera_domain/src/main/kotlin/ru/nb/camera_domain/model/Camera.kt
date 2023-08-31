@@ -6,6 +6,6 @@ data class Camera(
 	val name: String,
 	val favorites: Boolean,
 	val rec: Boolean,
-	val room: String,
-	val snapshot: String
+	val room: String?,
+	val snapshot: String?
 )

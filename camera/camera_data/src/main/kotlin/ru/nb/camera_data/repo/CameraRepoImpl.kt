@@ -1,5 +1,6 @@
 package ru.nb.camera_data.repo
 
+import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -19,10 +20,16 @@ class CameraRepoImpl(
 
 	override suspend fun getCameras(): BaseResponse<CameraAndRoom> {
 		return withContext(Dispatchers.IO) {
-			val res: BaseResponseDto<CameraAndRoomDto> =
-				httpClient.get("http://cars.cprogroup.ru/api/rubetek/cameras/") {
-				}.body()
-			res.toBaseResponse { it.toCameraAndRoom() }
+			try {
+				val res: BaseResponseDto<CameraAndRoomDto> =
+					httpClient.get("http://cars.cprogroup.ru/api/rubetek/cameras/") {
+					}.body()
+				println(res)
+				res.toBaseResponse { it.toCameraAndRoom() }
+			} catch (e: Exception) {
+				Log.e("rest", e.message.toString())
+				BaseResponse(success = false)
+			}
 		}
 	}
 

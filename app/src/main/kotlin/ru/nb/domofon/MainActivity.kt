@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import ru.nb.camera_presenter.test.CameraScreen2
+import ru.nb.camera_presenter.test.CameraScreen
 import ru.nb.domofon.ui.theme.DomofonTheme
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 				val tabRowItems = listOf(
 					TabRowItem(
 						title = getString(R.string.cameras),
-						screen = { CameraScreen2() }
+						screen = { CameraScreen() }
 					),
 					TabRowItem(
 						title = getString(R.string.doors),
@@ -60,6 +60,7 @@ class MainActivity : ComponentActivity() {
 						style = typography.headlineSmall
 					)
 					TabRow(
+						modifier = Modifier.padding(vertical = 4.dp),
 						selectedTabIndex = pagerState.currentPage,
 						indicator = { tabPositions ->
 							TabRowDefaults.Indicator(
@@ -74,8 +75,7 @@ class MainActivity : ComponentActivity() {
 								selected = pagerState.currentPage == index,
 								onClick = {
 									coroutineScope.launch {
-										pagerState.scrollToPage(page = index)
-//										pagerState.animateScrollToPage(page = index)
+										pagerState.animateScrollToPage(page = index)
 									}
 								},
 //								icon = {
@@ -95,11 +95,10 @@ class MainActivity : ComponentActivity() {
 
 					HorizontalPager(
 						state = pagerState,
-						pageContent = {
-							tabRowItems[pagerState.currentPage].screen()
-						},
 						userScrollEnabled = false
-					)
+					) {page ->
+						tabRowItems[page].screen()
+					}
 				}
 
 			}

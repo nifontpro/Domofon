@@ -3,5 +3,6 @@ apply {
 }
 
 dependencies {
+	"implementation"(project(Modules.baseDomain))
 	"implementation"(project(Modules.cameraDomain))
 }

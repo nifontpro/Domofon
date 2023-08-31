@@ -19,8 +19,8 @@ data class CameraDto(
 	val rec: Boolean,
 
 	@SerialName("room")
-	val room: String,
+	val room: String?,
 
 	@SerialName("snapshot")
-	val snapshot: String
+	val snapshot: String?
 )
