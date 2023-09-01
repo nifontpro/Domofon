@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
@@ -15,6 +16,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Grade
+import androidx.compose.material.icons.outlined.PlayCircle
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.material3.Icon
@@ -57,14 +59,14 @@ fun CameraCard(camera: Camera) {
 		Icon(
 			imageVector = if (camera.favorites) Icons.Filled.Star else Icons.Outlined.Grade,
 			contentDescription = "Favorite",
-			tint = MaterialTheme.colorScheme.secondary,
+			tint = MaterialTheme.colorScheme.secondaryContainer,
 			modifier = Modifier
 				.clickable { }
 				.align(Alignment.CenterEnd)
 				.padding(squareSize / 2)
 				.drawBehind {
 					drawCircle(
-						color = Color.Gray,
+						color = Color.LightGray,
 						radius = 56f,
 						style = Stroke(4f)
 					)
@@ -92,6 +94,15 @@ fun CameraCard(camera: Camera) {
 							contentDescription = camera.name,
 							contentScale = ContentScale.FillWidth,
 						)
+						Icon(
+							imageVector = Icons.Outlined.PlayCircle,
+							contentDescription = "Play",
+							tint = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.8f),
+							modifier = Modifier
+								.size(60.dp)
+								.clickable { }
+								.align(Alignment.Center)
+						)
 					}
 					Text(
 						text = camera.name,
@@ -104,7 +115,7 @@ fun CameraCard(camera: Camera) {
 					Icon(
 						imageVector = Icons.Filled.Star,
 						contentDescription = "Star",
-						tint = Color.Yellow,
+						tint = MaterialTheme.colorScheme.secondaryContainer,
 						modifier = Modifier
 							.padding(4.dp)
 							.align(Alignment.TopEnd)

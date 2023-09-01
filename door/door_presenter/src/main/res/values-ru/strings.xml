@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="withoutRoom">Без комнаты</string>
     <string name="data_load_error">Ошибка загрузки данных</string>
 </resources>

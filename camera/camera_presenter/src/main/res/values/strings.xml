@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="withoutRoom">Without Room</string>
+    <string name="data_load_error">Data load error</string>
 </resources>

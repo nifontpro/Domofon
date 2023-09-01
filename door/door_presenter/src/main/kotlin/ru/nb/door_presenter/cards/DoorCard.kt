@@ -68,7 +68,7 @@ fun DoorCard(door: Door) {
 					.clickable { }
 					.drawBehind {
 						drawCircle(
-							color = Color.Gray,
+							color = Color.LightGray,
 							radius = 56f,
 							style = Stroke(4f)
 						)
@@ -78,13 +78,13 @@ fun DoorCard(door: Door) {
 			Icon(
 				imageVector = if (door.favorites) Icons.Filled.Star else Icons.Outlined.Grade,
 				contentDescription = "Favorite",
-				tint = MaterialTheme.colorScheme.secondary,
+				tint = MaterialTheme.colorScheme.secondaryContainer,
 				modifier = Modifier
 					.padding(horizontal = 8.dp)
 					.clickable { }
 					.drawBehind {
 						drawCircle(
-							color = Color.Gray,
+							color = Color.LightGray,
 							radius = 56f,
 							style = Stroke(4f)
 						)
