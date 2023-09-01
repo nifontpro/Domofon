@@ -3,6 +3,8 @@ apply {
 }
 
 dependencies {
+	"implementation"(project(Modules.baseData))
+	"implementation"(project(Modules.baseDomain))
 	"implementation"(project(Modules.doorDomain))
 
 	"implementation" (Kotlin.serialization)

@@ -1,4 +1,4 @@
-package ru.nb.camera_presenter.test
+package ru.nb.door_presenter
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,21 +7,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ru.nb.camera_domain.repo.CameraRepo
+import ru.nb.door_domain.repo.DoorRepo
 import javax.inject.Inject
 
 @HiltViewModel
-class CameraViewModel @Inject constructor(
-	private val cameraRepo: CameraRepo
+class DoorViewModel @Inject constructor(
+	private val doorRepo: DoorRepo
 ) : ViewModel() {
 
-	var state by mutableStateOf(CameraState()) // Современный аналог liveData
+	var state by mutableStateOf(DoorState())
 		private set
 
 	init {
 		viewModelScope.launch {
-			val result = cameraRepo.getAll()
-			state = state.copy(cameras = result.data?.cameras ?: emptyList(), success = result.success)
+			state = state.copy(isLoading = true)
+			val result = doorRepo.getAll()
+			state = state.copy(
+				doors = result.data ?: emptyList(),
+				success = result.success,
+				isLoading = false
+			)
 		}
 
 	}

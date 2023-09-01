@@ -1,4 +1,4 @@
-package ru.nb.camera_data.repo
+package ru.nb.door_data.repo
 
 import android.util.Log
 import io.ktor.client.HttpClient
@@ -9,27 +9,26 @@ import kotlinx.coroutines.withContext
 import ru.md.base_data.model.BaseResponseDto
 import ru.md.base_data.model.toBaseResponse
 import ru.md.base_domain.model.BaseResponse
-import ru.nb.camera_data.model.CameraAndRoomDto
-import ru.nb.camera_data.model.toCameraAndRoom
-import ru.nb.camera_domain.model.CameraAndRoom
-import ru.nb.camera_domain.repo.CameraRepo
+import ru.nb.door_data.model.DoorDto
+import ru.nb.door_data.model.toDoor
+import ru.nb.door_domain.model.Door
+import ru.nb.door_domain.repo.DoorRepo
 
-class CameraRepoImpl(
+class DoorRepoImpl(
 	private val httpClient: HttpClient,
-) : CameraRepo {
+) : DoorRepo {
 
-	override suspend fun getAll(): BaseResponse<CameraAndRoom> {
+	override suspend fun getAll(): BaseResponse<List<Door>> {
 		return withContext(Dispatchers.IO) {
 			try {
-				val res: BaseResponseDto<CameraAndRoomDto> =
-					httpClient.get("http://cars.cprogroup.ru/api/rubetek/cameras/") {
+				val res: BaseResponseDto<List<DoorDto>> =
+					httpClient.get("http://cars.cprogroup.ru/api/rubetek/doors/") {
 					}.body()
-				res.toBaseResponse { it.toCameraAndRoom() }
+				res.toBaseResponse { it.map { doorDto -> doorDto.toDoor() } }
 			} catch (e: Exception) {
 				Log.e("rest", e.message.toString())
 				BaseResponse(success = false)
 			}
 		}
 	}
-
 }

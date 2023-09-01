@@ -1,4 +1,4 @@
-package ru.nb.domofon
+package ru.nb.domofon.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector

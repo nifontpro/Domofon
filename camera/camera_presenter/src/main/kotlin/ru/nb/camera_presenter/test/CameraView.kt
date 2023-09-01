@@ -23,8 +23,8 @@ fun CameraView(state: CameraState) {
 	val grouped = state.cameras.groupBy { it.room }
 
 	LazyColumn(
-		modifier = Modifier.fillMaxSize(),
-		verticalArrangement = Arrangement.spacedBy(8.dp)
+		modifier = Modifier.fillMaxSize().padding(vertical = 4.dp),
+		verticalArrangement = Arrangement.spacedBy(16.dp)
 	) {
 		grouped.forEach { (initial, cameras) ->
 			this@LazyColumn.stickyHeader {
