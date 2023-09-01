@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.ktor.client.HttpClient
+import io.realm.kotlin.Realm
 import ru.nb.door_data.repo.DoorRepoImpl
 import ru.nb.door_domain.repo.DoorRepo
 
@@ -17,8 +18,8 @@ object DoorDataModule {
 	@Provides
 	@ViewModelScoped
 //	@Singleton
-	fun providePeopleRepository(httpClient: HttpClient): DoorRepo {
-		return DoorRepoImpl(httpClient)
+	fun providePeopleRepository(httpClient: HttpClient, realm: Realm): DoorRepo {
+		return DoorRepoImpl(httpClient = httpClient, realm = realm)
 	}
 
 }

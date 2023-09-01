@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
 apply plugin: 'kotlin-kapt'
+//apply plugin: 'realm-android'
+apply plugin: 'io.realm.kotlin'
 
 //kotlin {
 //    jvmToolchain(8)
@@ -49,7 +51,6 @@ android {
 dependencies {
     kapt DaggerHilt.hiltCompiler
     implementation DaggerHilt.hiltAndroid
-
     implementation Coroutines.coroutines
 
     testImplementation Testing.junit4

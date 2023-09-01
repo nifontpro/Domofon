@@ -4,4 +4,5 @@ apply {
 
 dependencies {
 	"implementation"(project(Modules.baseDomain))
+	"implementation"(Realm.base)
 }

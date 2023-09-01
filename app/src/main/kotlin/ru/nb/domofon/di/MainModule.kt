@@ -12,12 +12,28 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
 import kotlinx.serialization.json.Json
+import ru.nb.door_data.db.model.DoorCol
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object MainModule {
+
+	@Provides
+	@Singleton
+	fun providesRealm(): Realm {
+		val realmConfiguration = RealmConfiguration.Builder(
+			schema = setOf(
+				DoorCol::class
+			)
+		)
+			.compactOnLaunch()
+			.build()
+		return Realm.open(realmConfiguration)
+	}
 
 	@Provides
 	@Singleton

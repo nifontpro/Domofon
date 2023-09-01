@@ -4,6 +4,8 @@ plugins {
 	kotlin("plugin.serialization")
 	id("com.google.dagger.hilt.android")
 	id("kotlin-kapt")
+//	id("realm-android")
+	id("io.realm.kotlin")
 }
 
 kapt {
@@ -99,9 +101,11 @@ dependencies {
 	implementation(KTor.kotlinJson)
 	implementation(KTor.logging)
 
-	kapt(Room.roomCompiler)
-	implementation(Room.roomKtx)
-	implementation(Room.roomRuntime)
+//	kapt(Room.roomCompiler)
+//	implementation(Room.roomKtx)
+//	implementation(Room.roomRuntime)
+
+	implementation(Realm.base)
 
 	testImplementation(Testing.junit4)
 	androidTestImplementation(Testing.junitAndroidExt)
