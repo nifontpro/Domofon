@@ -1,8 +1,9 @@
 package ru.nb.door_domain.repo
 
+import kotlinx.coroutines.flow.Flow
 import ru.md.base_domain.model.BaseResponse
 import ru.nb.door_domain.model.Door
 
 interface DoorRepo {
-	suspend fun getAll(): BaseResponse<List<Door>>
+	fun getAllFlow(): Flow<BaseResponse<List<Door>>>
 }

@@ -15,7 +15,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import kotlinx.serialization.json.Json
-import ru.nb.door_data.db.model.DoorCol
+import ru.nb.door_data.model.db.DoorCol
 import javax.inject.Singleton
 
 @Module
@@ -31,6 +31,7 @@ object MainModule {
 			)
 		)
 			.compactOnLaunch()
+			.deleteRealmIfMigrationNeeded()
 			.build()
 		return Realm.open(realmConfiguration)
 	}
