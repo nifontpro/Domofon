@@ -1,35 +1,39 @@
 package ru.nb.camera_data.repo
 
-import android.util.Log
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import ru.md.base_data.model.BaseResponseDto
-import ru.md.base_data.model.toBaseResponse
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import ru.md.base_domain.model.BaseResponse
-import ru.nb.camera_data.model.CameraAndRoomDto
-import ru.nb.camera_data.model.toCameraAndRoom
 import ru.nb.camera_domain.model.CameraAndRoom
 import ru.nb.camera_domain.repo.CameraRepo
 
 class CameraRepoImpl(
-	private val httpClient: HttpClient,
+	private val restRepo: RestRepo,
+	private val dbRepo: DbRepo
 ) : CameraRepo {
 
-	override suspend fun getAll(): BaseResponse<CameraAndRoom> {
-		return withContext(Dispatchers.IO) {
-			try {
-				val res: BaseResponseDto<CameraAndRoomDto> =
-					httpClient.get("http://cars.cprogroup.ru/api/rubetek/cameras/") {
-					}.body()
-				res.toBaseResponse { it.toCameraAndRoom() }
-			} catch (e: Exception) {
-				Log.e("rest", e.message.toString())
-				BaseResponse(success = false)
-			}
+	override fun getAllFlow(): Flow<BaseResponse<CameraAndRoom>> = flow {
+
+		val camerasDb = dbRepo.getAll()
+		emit(
+			BaseResponse(
+				data = CameraAndRoom(
+					cameras = camerasDb,
+					room = emptyList()
+				),
+				success = true
+			)
+		)
+
+		val camerasRest = restRepo.getAll()
+		if (camerasRest.success) {
+			emit(camerasRest)
+			camerasRest.data?.let { dbRepo.replaceAll(it.cameras) }
+		} else if (camerasDb.isEmpty()) {
+			emit(BaseResponse(success = false))
 		}
-	}
+
+	}.flowOn(Dispatchers.IO)
 
 }

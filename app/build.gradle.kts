@@ -105,7 +105,7 @@ dependencies {
 //	implementation(Room.roomKtx)
 //	implementation(Room.roomRuntime)
 
-	implementation(Realm.base)
+	implementation(Realm.core)
 
 	testImplementation(Testing.junit4)
 	androidTestImplementation(Testing.junitAndroidExt)

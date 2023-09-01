@@ -9,5 +9,5 @@ dependencies {
 
 	"implementation" (Kotlin.serialization)
 	"implementation" (KTor.core)
-	"implementation" (Realm.base)
+	"implementation" (Realm.core)
 }

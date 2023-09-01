@@ -15,6 +15,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import kotlinx.serialization.json.Json
+import ru.nb.camera_data.model.db.CameraCol
 import ru.nb.door_data.model.db.DoorCol
 import javax.inject.Singleton
 
@@ -27,7 +28,8 @@ object MainModule {
 	fun providesRealm(): Realm {
 		val realmConfiguration = RealmConfiguration.Builder(
 			schema = setOf(
-				DoorCol::class
+				DoorCol::class,
+				CameraCol::class
 			)
 		)
 			.compactOnLaunch()
